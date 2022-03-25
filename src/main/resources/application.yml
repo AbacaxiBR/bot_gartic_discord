@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://database:5432/art
+    username: art
+    password: art
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+# Configuration for the production server (Good Gartic)
+# TODO: Make this environmental-variables dependent so it can be changed on heroku without changing the code
+discord:
+  token: ${DISCORD_TOKEN}
+  guild-id: ${GUILD_ID}
+  art-channel-id: ${ART_CHANNEL_ID}
+  repost-channel-id: ${REPOST_CHANNEL_ID}
+  repost-interval: ${REPOST_INTERVAL}
+  developer-id: 238728915647070209 # So that the bot can ping me if shit gets wrong
+
+server:
+  tomcat:
+    max-swallow-size: -1
+    max-http-form-post-size: -1

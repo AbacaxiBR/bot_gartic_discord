@@ -1,0 +1,31 @@
+services:
+  database:
+    image: 'postgres:latest'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: art
+      POSTGRES_PASSWORD: art
+      POSTGRES_DATABASE: art
+    volumes:
+      - data:/var/lib/postgresql/data
+  app:
+    ports:
+      - 8080:8080
+    build: .
+    environment:
+      # Loaded from the .env file
+      DISCORD_TOKEN: $DISCORD_TOKEN
+      ADMINISTRATION_PASSWORD: $ADMINISTRATION_PASSWORD
+
+      GUILD_ID: 683633975838769192 # ID of the managed guild
+      ART_CHANNEL_ID: 683638355895779450 #gartic-art
+      REPOST_CHANNEL_ID: 683633975842963456 #chat
+      REPOST_INTERVAL: 1440 # 24 hours (the value is in minutes)
+    depends_on:
+      - database
+
+volumes:
+  data:
+    external:
+      name: random-art-bot-data
